@@ -12,6 +12,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var remainingProgressBar: UIProgressView!
+    @IBOutlet weak var remainingTimeLabel: UILabel!
     
     let eggTimes = [
         "Soft": 300,
@@ -33,6 +34,7 @@ class ViewController: UIViewController {
             secondsPassed = 0
             remainingProgressBar.progress = 0.0
             titleLabel.text = hardness
+            
             timer = Timer.scheduledTimer(
                 timeInterval: 1.0,
                 target: self,
@@ -45,9 +47,12 @@ class ViewController: UIViewController {
     
     @objc func updateCounter() {
         if secondsPassed < secondsTotal {
+            let minutesRemaning = (secondsTotal - secondsPassed) / 60
+            let secondsRemainig = (secondsTotal - secondsPassed) % 60
+            
             secondsPassed += 1
-            print("\(secondsPassed) seconds passed")
             remainingProgressBar.progress = Float(secondsPassed) / Float(secondsTotal)
+            remainingTimeLabel.text = String(format: "%02d", minutesRemaning) + ":" + String(format: "%02d", secondsRemainig)
         } else {
             timer.invalidate()
             titleLabel.text = "Done!"

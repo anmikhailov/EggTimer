@@ -131,14 +131,29 @@
                                                 <color key="progressTintColor" systemColor="systemYellowColor"/>
                                                 <color key="trackTintColor" systemColor="systemGrayColor"/>
                                             </progressView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qsn-5H-ecK" userLabel="Remaining Time Label">
+                                                <rect key="frame" x="137" y="145.5" width="100" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="B2e-wR-u2R"/>
+                                                    <constraint firstAttribute="height" constant="50" id="gOU-xQ-qUP"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="HSl-TK-05j" firstAttribute="leading" secondItem="nJN-th-c5K" secondAttribute="leading" id="4yO-S8-BB4"/>
                                             <constraint firstAttribute="trailing" secondItem="HSl-TK-05j" secondAttribute="trailing" id="Iu0-aT-xrZ"/>
+                                            <constraint firstItem="Qsn-5H-ecK" firstAttribute="centerX" secondItem="nJN-th-c5K" secondAttribute="centerX" id="X5V-Sc-otb"/>
+                                            <constraint firstItem="Qsn-5H-ecK" firstAttribute="top" secondItem="HSl-TK-05j" secondAttribute="bottom" constant="20" id="di4-0I-jng"/>
                                             <constraint firstItem="HSl-TK-05j" firstAttribute="centerY" secondItem="nJN-th-c5K" secondAttribute="centerY" id="xhq-cb-uAL"/>
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="Qsn-5H-ecK" firstAttribute="leading" secondItem="XLm-5r-pSP" secondAttribute="trailing" constant="-237" id="Rq4-Ri-ZjQ"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -152,6 +167,7 @@
                     </view>
                     <connections>
                         <outlet property="remainingProgressBar" destination="HSl-TK-05j" id="pT5-Qi-W83"/>
+                        <outlet property="remainingTimeLabel" destination="Qsn-5H-ecK" id="xKt-g6-ZZ4"/>
                         <outlet property="titleLabel" destination="XLm-5r-pSP" id="2Tc-ra-3bW"/>
                     </connections>
                 </viewController>
