@@ -79,6 +79,8 @@ class ViewController: UIViewController {
         } else {
             timer.invalidate()
             titleLabel.text = "Done!"
+            cancelButton.isHidden = true
+            remainingTimeLabel.isHidden = true
             playAlarmSound()
         }
     }
