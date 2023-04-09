@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var remainingProgressBar: UIProgressView!
     @IBOutlet weak var remainingTimeLabel: UILabel!
+    @IBOutlet weak var cancelButton: UIButton!
     
     let eggTimes = [
         "Soft": 300,
@@ -25,15 +26,27 @@ class ViewController: UIViewController {
     var timer = Timer()
     var alarmSound: AVAudioPlayer?
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        cancelButton.isHidden = true
+    }
+    
     @IBAction func hardnessSelected(_ sender: UIButton) {
         
         timer.invalidate()
         
         if let hardness = sender.currentTitle {
+            
             secondsTotal = eggTimes[hardness] ?? 0
             secondsPassed = 0
             remainingProgressBar.progress = 0.0
+            
+            remainingTimeLabel.text = String(format: "%02d", (secondsTotal - secondsPassed) / 60) + ":" + String(format: "%02d", (secondsTotal - secondsPassed) % 60)
+            
             titleLabel.text = hardness
+            cancelButton.isHidden = false
+            remainingTimeLabel.isHidden = false
             
             timer = Timer.scheduledTimer(
                 timeInterval: 1.0,
@@ -45,12 +58,22 @@ class ViewController: UIViewController {
 
     }
     
+    @IBAction func cancelClicked(_ sender: UIButton) {
+        timer.invalidate()
+        remainingTimeLabel.isHidden = true
+        cancelButton.isHidden = true
+        remainingProgressBar.progress = 0.0
+        titleLabel.text = "How do you like your eggs?"
+        
+    }
+    
     @objc func updateCounter() {
         if secondsPassed < secondsTotal {
+            secondsPassed += 1
+            
             let minutesRemaning = (secondsTotal - secondsPassed) / 60
             let secondsRemainig = (secondsTotal - secondsPassed) % 60
-            
-            secondsPassed += 1
+
             remainingProgressBar.progress = Float(secondsPassed) / Float(secondsTotal)
             remainingTimeLabel.text = String(format: "%02d", minutesRemaning) + ":" + String(format: "%02d", secondsRemainig)
         } else {
